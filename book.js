@@ -33,37 +33,41 @@ const toggleSpinner = (spin) => {
         spiner.style.display = 'none';
     }
 }
-// total result 
-// const totalResult = (result) =>{
-//     const resultContainer = document.getElementById('total-result')
-// }
+
 // display search result function 
 const displayBooks = (books) => {
     toggleSpinner('hide');
-    // console.log(books)
+    console.log(books)
     if (books.docs.length === 0) {
         errorText.innerText = "No Results Found"
     } else {
         errorText.innerText = "";
     }
     books.docs.forEach((book) => {
-        console.log(books.docs.length)
-        totalResult.innerHTML = `<h3 id="result" class="pb-3">Showing: ${books.numFound} of <span>${books.docs.length}</span></h3>`
+        const authorName = book?.author_name ? book.author_name.join(' , ') : 'unknown';
+        const publishedIn = book?.first_publish_year
+            ? book.first_publish_year
+            : 'unknown';
+        const publisher = book?.publisher ? book.publisher.join(' , ') : 'unknown';
+
+        const imgUrl = book?.cover_i
+            ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+            : './images/NoImageFoun.png';
+        // console.log(books.docs.length)
+        totalResult.innerHTML = `<h3 id="result" class="pb-3">Showing: ${books.docs.length} of <span>${books.numFound}</span></h3>`
         const div = document.createElement('div')
         div.classList.add('col')
         div.innerHTML = `
-        <div class="container h-100 d-flex" >
-        <div>
-        <img src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" 
+        <div class="card h-100"  >
+          <img src="${imgUrl}" class="card-img-top" height="400px" alt="...">
+         <div class="card-body">
+         <h5 class="card-title">${book.title}</h5>
+         <p class="car d-text">Autor: <span class="text-small">${authorName}</span></p>
+         <p>Published in <span>${publishedIn}</span></p>
+         <p class="fw-bold>Publisher: <span>${publisher}</span></p>
+         </div>
         </div>
-        <div class="card-body">
-            <h5 class="card-title">${book.title}</h5>
-            <p class="card-text">Author of this book:<br><strong>${book.author_name}</strong></p>
-            <p class="card-text">Publisher of this book:<br><strong>${book.publisher}</strong></p>
-            <p class="card-text">Publishing date of this book:<br><strong>${book.first_publish_year}</strong></p>
-        </div>
-    </div>
-    `
+          `;
 
 
         bookDisplay.appendChild(div);
