@@ -16,22 +16,32 @@
 <body>
     <!-- header start  -->
     <header>
-        <h1 class="text-info text-center pt-3">Search Your Favorite Book</h1>
-        <div class="input-group mb-3 container w-50 mt-3">
-            <input type="text" class="form-control " placeholder="Please Write Your book Name..."
+        <h1 class="text-info text-center pt-4 ">Search Your Favorite Book</h1>
+        <div class="input-group mb-3 pb-5 container w-50 mt-3">
+            <input id="input-field" type="text" class="form-control " placeholder="Please Write Your book Name..."
                 aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+            <button class="btn btn-outline-info" type="button" id="search-btn">Search</button>
         </div>
     </header>
     <!-- main part start  -->
     <main>
+        <!-- spinner  -->
+        <div id="spinner" class="align-items-center text-center" style="display: none;">
+            <h3>Loading...</h3>
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
         <!-- error handleing  -->
         <div>
-            <p class="text-danger" id="error-handle"></p>
+            <h4 class="text-danger text-center" id="error-handle"></h4>
+        </div>
+        <!-- show results -->
+        <div id="total-result">
+
         </div>
         <!-- books container  -->
-        <div id="book-display" class="row row-cols-1 row-cols-lg-3 g-4 container mx-auto">
-
+        <div id="book-display" class="row row-cols-1 row-cols-lg-3  row-cols-md-3 g-5">
         </div>
     </main>
 
